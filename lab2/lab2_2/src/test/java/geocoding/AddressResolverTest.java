@@ -3,7 +3,6 @@ package geocoding;
 import connection.ISimpleHttpClient;
 
 import org.json.simple.parser.ParseException;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

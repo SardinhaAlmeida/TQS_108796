@@ -2,7 +2,6 @@ package integration;
 
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import connection.TqsBasicHttpClient;
@@ -14,10 +13,8 @@ import java.net.URISyntaxException;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.when;
 
 public class AddressResolverIT {
 
@@ -43,7 +40,8 @@ public class AddressResolverIT {
     @Test
     public void whenBadCoordidates_thenReturnNoValidAddrress() throws IOException, URISyntaxException, ParseException {
 
-        assertThrows(NullPointerException.class, () -> resolver.findAddressForLocation( -361,-361));
+        Optional<Address> result = resolver.findAddressForLocation( -361,-361);
+        assertFalse( result.isPresent());
         
     }
 
