@@ -2,8 +2,8 @@
 
 ### alínea b)
 
-SuT : AddressResolver
-Service to Mock : HttpClient
+* SuT : AddressResolver
+* Service to Mock : HttpClient
 
 ## exercício 2_3
 
