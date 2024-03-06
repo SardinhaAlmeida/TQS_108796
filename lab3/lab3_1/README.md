@@ -54,4 +54,8 @@ Este ficheiro é usado para definir as propriedades que serão usadas nos testes
 
 ### e) the sample project demonstrates three test strategies to assess an API (C, D and E) developed with SpringBoot. Which are the main/key differences? 
 
+Na estratégia de teste **C** apenas o Controller é testado, sendo os serviços simulados através de mocks, utilizando 
+uma instância do *MockMvc*.
+Quanto à estratégia **D**, é um teste de integração, onde são usados os componentes mas a base de dados é simulada, usando igualmente o *MockMvc*. 
+Por fim, a estratégia **E** é semelhante à estratégia anterior mas a base de dados é real,e é usado o *TestRestTemplate* em vez do *MockMvc* de forma a usarmos um cliente HTTP real.
 
