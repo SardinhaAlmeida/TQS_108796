@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Bus Reservation System</title>
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+</head>
+
+<body>
+
+    <div class="grid-container" style="margin-top: 20px;">
+        <table>
+            <tbody>
+                <tr th:each="bus : ${bus}">
+                    <td th:text="${bus.busNumber}"></td>
+                    <td th:text="${bus.origin}"></td>
+                    <td th:text="${bus.destination}"></td>
+                    <td th:text="${bus.date}"></td>
+                    <td th:text="${bus.departureTime}"></td>
+                    <td th:text="${bus.arrivalTime}"></td>
+                    <td th:text="${bus.price}"></td>
+                    <td th:text="${bus.capacity}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="reservationForm" class="form-popup">
+            <form class="form-container" th:action="@{/api/reservation}" method="post">
+
+                <h2>Your Reservation</h2>
+
+                <h3>Personal Details</h3>
+
+                <label for="name">Name:</label>
+                <input type="text" th:value="${name}" name="name" placeholder="Enter Name" required>
+
+                <label for="surname">Surname:</label>
+                <input type="text" th:value="${surname}" name="surname" placeholder="Enter Surname" required>
+
+                <label for="email">Email:</label>
+                <input type="text" th:value="${email}" name="email" placeholder="Enter Email" required>
+
+                <label for="phoneNumber">Phone Number:</label>
+                <input type="text" th:value="${phoneNumber}" name="phoneNumber" placeholder="Enter Phone Number" required>
+
+                <label for="address">Address:</label>
+                <input type="text" th:value="${address}" name="address" placeholder="Enter Address" required>
+
+                <label for="city">City:</label>
+                <input type="text" th:value="${city}" name="city" placeholder="Enter City" required>
+
+                <label for="postalCode">Postal Code:</label>
+                <input type="text" th:value="${postalCode}" name="postalCode" placeholder="Enter Postal Code" required>
+
+                <label for="country">Country:</label>
+                <input type="text" th:value="${country}" name="country" placeholder="Enter Country" required>
+
+                <h3>Payment Details</h3>
+                <label for="creditCardNumber">Credit Card Number:</label>
+                <input type="text" th:value="${creditCardNumber}" name="creditCardNumber"
+                    placeholder="Enter Credit Card Number" required>
+
+                <label for="creditCardMM">Credit Card MM:</label>
+                <input type="text" th:value="${creditCardMM}" name="creditCardMM" placeholder="Enter Credit Card MM"
+                    required>
+
+                <label for="creditCardYY">Credit Card YY:</label>
+                <input type="text" th:value="${creditCardYY}" name="creditCardYY" placeholder="Enter Credit Card YY"
+                    required>
+
+                <label for="creditCardCVV">CVV:</label>
+                <input type="text" th:value="${creditCardCVV}" name="creditCardCVV" placeholder="Enter CVV" required>
+
+                <input type="hidden" name="busNumber" th:value="${bus.busNumber}" />
+
+                <button type="submit" class="btn">Submit</button>
+                <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+            </form>
+        </div>
+    </div>
+</body>

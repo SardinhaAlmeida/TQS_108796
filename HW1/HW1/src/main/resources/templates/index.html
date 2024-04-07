@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Bus Reservation System</title>
+  <link rel="stylesheet" type="text/css" href="/css/index.css">
+</head>
+
+<body>
+  <h1>Bus Reservation System</h1>
+  <h2>Search for your bus trip here!</h2>
+  <form th:action="@{/api/bus}" method="post">
+    <label for="from">From:</label>
+    <input type="text" id="from" name="origin" placeholder="Enter origin" th:value="${origin}">
+    <label for="to">To:</label>
+    <input type="text" id="to" name="destination" placeholder="Enter destination" th:value="${destination}">
+    <label for="date">Date:</label>
+    <input type="date" id="date" name="date" th:value="${date}">
+    <button type="submit">Search Buses</button>
+  </form>
+  <!-- <script src="/js/index.js"></script> -->
+</body>
+
+</html>

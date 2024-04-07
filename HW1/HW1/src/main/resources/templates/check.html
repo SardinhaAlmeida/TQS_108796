@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Bus Reservation System</title>
+    <link rel="stylesheet" type="text/css" href="/css/check.css">
+</head>
+
+<body>
+    <div id="tokenInput">
+        <h1>Check your reservation!</h1>
+        <h2>Insert token:</h2>
+        <form id="checkReservationForm" method="get">
+            <input id="tokenInputField" name="token" placeholder="Enter token" th:value="${token}" />
+            <button type="submit">Check</button>
+        </form>
+    </div>
+    <div id="reservationDetails" style="display: none;">
+
+        <div class="container">
+
+            <h2>Your Reservation Details</h2>
+
+            <div class="row">
+
+                    <div class="col-6">
+                        <h3>Bus details</h3>
+                        <div><strong>Bus Number:</strong> <span id="busNumber"></span></div>
+                        <div><strong>Origin:</strong> <span id="origin"></span></div>
+                        <div><strong>Destination:</strong> <span id="destination"></span></div>
+                        <div><strong>Date:</strong> <span id="date"></span></div>
+                        <div><strong>Departure Time:</strong> <span id="departureTime"></span></div>
+                        <div><strong>Arrival Time:</strong> <span id="arrivalTime"></span></div>
+                        <div><strong>Price:</strong> <span id="price"></span></div>
+                        <div><strong>Capacity:</strong> <span id="capacity"></span></div>
+                    </div>
+
+                    <div class="col-6">
+                        <h3>Personal details</h3>
+                        <div><strong>Name:</strong> <span id="name"></span></div>
+                        <div><strong>Surname:</strong> <span id="surname"></span></div>
+                        <div><strong>Email:</strong> <span id="email"></span></div>
+                        <div><strong>Phone Number:</strong> <span id="phoneNumber"></span></div>
+                        <div><strong>Address:</strong> <span id="address"></span></div>
+                        <div><strong>City:</strong> <span id="city"></span></div>
+                        <div><strong>Postal Code:</strong> <span id="postalCode"></span></div>
+                        <div><strong>Country:</strong> <span id="country"></span></div>
+                        <div><strong>creditCardNumber:</strong> <span id="creditCardNumber"></span></div>
+                        <div><strong>creditCardMM:</strong> <span id="creditCardMM"></span></div>
+                        <div><strong>creditCardYY:</strong> <span id="creditCardYY"></span></div>
+                        <div><strong>creditCardCVV:</strong> <span id="creditCardCVV"></span></div>
+                    </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+
+    <p id="noReservationMessage" style="display: none;">No reservation found for the provided token.</p>
+    </div>
+
+    <script>
+        window.onload = function () {
+            // Add event listener to the form submission
+            document.getElementById('checkReservationForm').addEventListener('submit', function (event) {
+                // Prevent form submission
+                event.preventDefault();
+
+                // Get the token input value
+                var token = document.getElementById('tokenInputField').value;
+
+                // Check if token is provided
+                if (token.trim() !== '') {
+                    // Make an AJAX request to check reservation details
+                    var xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === XMLHttpRequest.DONE) {
+                            if (xhr.status === 200) {
+                                // Reservation found, display details
+                                var reservation = JSON.parse(xhr.responseText);
+                                displayReservationDetails(reservation);
+                            } else {
+                                // No reservation found, display error message
+                                document.getElementById('noReservationMessage').style.display = 'block';
+                                document.getElementById('reservationDetails').style.display = 'none';
+                            }
+                        }
+                    };
+                    xhr.open('GET', '/api/reservation/check?token=' + token, true);
+                    xhr.send();
+                } else {
+                    // If token is not provided, show an alert or handle it as per your requirement
+                    alert('Please enter a token.');
+                }
+            });
+        };
+
+        // Function to display reservation details
+        function displayReservationDetails(reservation) {
+            // Show reservation details section
+            document.getElementById('reservationDetails').style.display = 'block';
+            document.getElementById('noReservationMessage').style.display = 'none';
+
+            // Fill in reservation details
+            document.getElementById('busNumber').innerText = reservation.bus.busNumber;
+            document.getElementById('origin').innerText = reservation.bus.origin;
+            document.getElementById('destination').innerText = reservation.bus.destination;
+            document.getElementById('date').innerText = reservation.bus.date;
+            document.getElementById('departureTime').innerText = reservation.bus.departureTime;
+            document.getElementById('arrivalTime').innerText = reservation.bus.arrivalTime;
+            document.getElementById('price').innerText = reservation.bus.price;
+            document.getElementById('capacity').innerText = reservation.bus.capacity;
+            document.getElementById('name').innerText = reservation.person.name;
+            document.getElementById('surname').innerText = reservation.person.surname;
+            document.getElementById('email').innerText = reservation.person.email;
+            document.getElementById('phoneNumber').innerText = reservation.person.phoneNumber;
+            document.getElementById('address').innerText = reservation.person.address;
+            document.getElementById('city').innerText = reservation.person.city;
+            document.getElementById('postalCode').innerText = reservation.person.postalCode;
+            document.getElementById('country').innerText = reservation.person.country;
+            document.getElementById('creditCardNumber').innerText = reservation.creditCardNumber;
+            document.getElementById('creditCardMM').innerText = reservation.creditCardMM;
+            document.getElementById('creditCardYY').innerText = reservation.creditCardYY;
+            document.getElementById('creditCardCVV').innerText = reservation.creditCardCVV;
+
+        }
+    </script>
+</body>
+
+</html>
