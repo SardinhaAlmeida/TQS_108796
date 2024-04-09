@@ -78,7 +78,6 @@ public class CurrencyConvService_UnitTest {
     
         assertTrue(result.containsKey("data"));
         assertEquals(0.9206201352, ((Map<String, Object>) result.get("data")).get("EUR"));
-        // assertEquals(0, mockWebServer.getRequestCount());
     }
     
 }

@@ -2,6 +2,7 @@ package HW1.integrationTests;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -72,6 +73,7 @@ public class ReservationControllerIT {
     }
 
     @Test
+    @DisplayName("Test fillData endpoint")
     void testFillDataEndpoint() throws Exception {
 
         // Perform a mock HTTP POST request to the fillData endpoint
@@ -85,6 +87,7 @@ public class ReservationControllerIT {
     }
 
     @Test
+    @DisplayName("Test bookReservation endpoint")
     void testBookReservationEndpoint() throws Exception {
 
         // Perform a mock HTTP POST request to the bookReservation endpoint
@@ -110,6 +113,7 @@ public class ReservationControllerIT {
     }
 
     @Test
+    @DisplayName("Test getReservations endpoint")
     void testGetReservationsEndpoint() throws Exception {
         mvc.perform(post("/api/reservation/check")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
@@ -118,6 +122,7 @@ public class ReservationControllerIT {
     }
 
     @Test
+    @DisplayName("Test getReservations endpoint with valid token")
     void testGetReservationsEndpointWithValidToken() throws Exception {
         Reservation reservation2 = new Reservation(
             1234567890123456L, 
@@ -140,6 +145,7 @@ public class ReservationControllerIT {
     }
     
     @Test
+    @DisplayName("Test getReservations endpoint with invalid token")
     void testGetReservationsEndpointWithInvalidToken() throws Exception {
     
         String invalidToken = "123";

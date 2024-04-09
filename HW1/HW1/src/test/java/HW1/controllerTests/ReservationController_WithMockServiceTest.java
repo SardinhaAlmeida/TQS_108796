@@ -9,6 +9,7 @@ import HW1.service.PersonService;
 import HW1.service.ReservationService;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.hamcrest.Matchers.notNullValue;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,6 +74,7 @@ public class ReservationController_WithMockServiceTest {
     }
 
     @Test
+    @DisplayName("Test fillData")
     void testFillData() throws Exception {
 
         when(bus_service.getBusByBusNumber(4)).thenReturn(bus4);
@@ -90,6 +92,7 @@ public class ReservationController_WithMockServiceTest {
     }
 
     @Test
+    @DisplayName("Test checkView")
     void testCheckView() throws Exception {
 
         mvc.perform(post("/api/reservation/check")
@@ -100,6 +103,7 @@ public class ReservationController_WithMockServiceTest {
 
 
     @Test
+    @DisplayName("Test bookReservation")
     void testBookReservation() throws Exception {
         // Mocking the PersonService to return a saved person
         when(person_service.savePerson(any(Person.class))).thenReturn(jose);
@@ -136,6 +140,7 @@ public class ReservationController_WithMockServiceTest {
     }
 
     @Test
+    @DisplayName("Test getReservation with valid token")
     void testGetReservationWithValidToken() throws Exception {
 
         when(reservation_service.getReservation("validToken")).thenReturn(Optional.of(reservation));
@@ -150,6 +155,7 @@ public class ReservationController_WithMockServiceTest {
     }
 
     @Test
+    @DisplayName("Test getReservation with invalid token")
     void testGetReservationWithInvalidToken() throws Exception {
 
         when(reservation_service.getReservation(anyString())).thenReturn(Optional.empty());

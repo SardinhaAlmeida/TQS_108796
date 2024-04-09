@@ -8,40 +8,40 @@ import org.openqa.selenium.support.PageFactory;
 public class PersonalPage {
     private WebDriver driver;
 
-    @FindBy(name = "name")
+    @FindBy(xpath = "//*[@id=\"name\"]")
     private WebElement nameInput;
 
-    @FindBy(name = "surname")
+    @FindBy(xpath = "//*[@id=\"reservationForm\"]/form/input[2]")
     private WebElement surnameInput;
 
-    @FindBy(name = "email")
+    @FindBy(xpath = "//*[@id=\"reservationForm\"]/form/input[3]")
     private WebElement emailInput;
 
-    @FindBy(name = "phoneNumber")
+    @FindBy(xpath = "//*[@id=\"reservationForm\"]/form/input[4]")
     private WebElement phoneNumberInput;
 
-    @FindBy(name = "address")
+    @FindBy(xpath = "//*[@id=\"reservationForm\"]/form/input[5]")
     private WebElement addressInput;
 
-    @FindBy(name = "city")
+    @FindBy(xpath = "//*[@id=\"reservationForm\"]/form/input[6]")
     private WebElement cityInput;
 
-    @FindBy(name = "postalCode")
+    @FindBy(xpath = "//*[@id=\"reservationForm\"]/form/input[7]")
     private WebElement postalCodeInput;
 
-    @FindBy(name = "country")
+    @FindBy(xpath = "//*[@id=\"reservationForm\"]/form/input[8]")
     private WebElement countryInput;
 
-    @FindBy(name = "creditCardNumber")
+    @FindBy(xpath = "//*[@id=\"reservationForm\"]/form/input[9]")
     private WebElement creditCardNumberInput;
 
-    @FindBy(name = "creditCardMM")
+    @FindBy(xpath = "//*[@id=\"reservationForm\"]/form/input[10]")
     private WebElement creditCardMMInput;
 
-    @FindBy(name = "creditCardYY")
+    @FindBy(xpath = "//*[@id=\"reservationForm\"]/form/input[11]")
     private WebElement creditCardYYInput;
 
-    @FindBy(name = "creditCardCVV")
+    @FindBy(xpath = "//*[@id=\"reservationForm\"]/form/input[12]")
     private WebElement creditCardCVVInput;
 
     @FindBy(xpath = "//form[@class='form-container']")

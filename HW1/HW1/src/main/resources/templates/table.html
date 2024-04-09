@@ -29,18 +29,18 @@
         </thead>
         <tbody>
             <tr th:each="bus : ${buses}">
-                <td th:text="${bus.busNumber}"></td>
+                <td th:text="${bus.busNumber}" id="busNumber"></td>
                 <td th:text="${bus.origin}" id="origin"></td>
                 <td th:text="${bus.destination}" id="destination"></td>
                 <td th:text="${bus.date}" id="date"></td>
                 <td th:text="${bus.departureTime}"></td>
                 <td th:text="${bus.arrivalTime}"></td>
-                <td class="currency" th:attr="data-original-price=${bus.price}"></td>
+                <td class="currency" th:attr="data-original-price=${bus.price}" id="price"></td>
                 <td th:text="${bus.capacity}"></td>
                 <td>
                     <form th:action="@{/api/details}" method="post">
                         <input type="hidden" name="busNumber" th:value="${bus.busNumber}" />
-                        <button type="submit">Reserve</button>
+                        <button type="submit" id="button">Reserve</button>
                     </form>
                 </td>
             </tr>

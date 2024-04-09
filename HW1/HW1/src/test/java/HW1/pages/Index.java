@@ -1,5 +1,9 @@
 package HW1.pages;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,7 +19,7 @@ public class Index {
     @FindBy(id = "to")
     private WebElement toInput;
 
-    @FindBy(id = "date")
+    @FindBy(xpath = "//*[@id=\"date\"]")
     private WebElement dateInput;
 
     @FindBy( css = "button:nth-child(7)")
@@ -37,8 +41,8 @@ public class Index {
         toInput.sendKeys(destination);
     }
 
-    public void setDate(String date) {
-        dateInput.sendKeys(date);
+    public void setChoosenDate(String choosen_date) {
+        dateInput.sendKeys(choosen_date);
     }
 
     public void submitSearchForm() {
@@ -57,7 +61,7 @@ public class Index {
         return toInput.getAttribute("value");
     }
 
-    public String getDate() {
+    public String getChoosenDate() {
         return dateInput.getAttribute("value");
     }
 }

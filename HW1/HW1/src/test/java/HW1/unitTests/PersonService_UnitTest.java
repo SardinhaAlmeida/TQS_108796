@@ -24,35 +24,6 @@ public class PersonService_UnitTest {
     @InjectMocks
     private PersonServiceImpl person_service;
 
-    // @BeforeEach
-    // public void setUp() {
-
-    //     Person maria = new Person(
-    //             1L, 
-    //             "Maria",
-    //             "Joana", 
-    //             "maria.joana@example.com", 
-    //             "1234567890",
-    //             "Rua da Alegria 123", 
-    //             "Viseu", 
-    //             "3660-123", 
-    //             "Portugal" 
-    //     );
-
-    //     Person joaquim = new Person(
-    //             "Joaquim",
-    //             "Manuel", 
-    //             "joao@gmail.com",
-    //             "9876543210",
-    //             "Rua da Tristeza 321",
-    //             "Porto",
-    //             "4000-123",
-    //             "Portugal"
-    //     );
-    //     joaquim.setPersonId(2L);
-
-    // }
-
     @Test
     @DisplayName("Test savePerson")
     void testSavePerson() {

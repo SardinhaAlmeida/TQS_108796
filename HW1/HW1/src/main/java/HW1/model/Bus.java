@@ -15,11 +15,8 @@ import lombok.Setter;
 public class Bus {
 
     @Id
-    // @GeneratedValue(strategy = GenerationType.IDENTITY) 
     @Column(name = "bus_number")
     private int busNumber;
-    // @Column(name = "bus_id")
-    // private Long id;
 
     @Column(name = "origin")
     private String origin;

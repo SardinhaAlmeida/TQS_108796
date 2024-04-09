@@ -1,6 +1,7 @@
 package HW1.integrationTests;
 
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -21,6 +22,7 @@ public class CurrencyConversionControllerIT {
     private MockMvc mvc;
 
     @Test
+    @DisplayName("Test getAllCurencies endpoint")
     void testGetAllCurrencies() throws Exception {
         mvc.perform(get("/api/currencies")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -29,6 +31,7 @@ public class CurrencyConversionControllerIT {
     }
 
     @Test
+    @DisplayName("Test getExchange endpoint")
     void testGetExchange() throws Exception {
         String fromCurrency = "USD";
         String toCurrency = "EUR";

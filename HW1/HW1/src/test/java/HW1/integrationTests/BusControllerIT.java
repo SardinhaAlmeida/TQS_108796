@@ -2,6 +2,7 @@ package HW1.integrationTests;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -39,6 +40,7 @@ public class BusControllerIT {
     }
 
     @Test
+    @DisplayName("Test home endpoint")
     void testHomeEndpoint() throws Exception {
         // Perform a mock HTTP GET request to the home endpoint
         mvc.perform(get("/"))
@@ -47,6 +49,7 @@ public class BusControllerIT {
     }
 
     @Test
+    @DisplayName("Test searchBuses endpoint")
     void testSearchBusesEndpoint() throws Exception {
 
             // Perform a mock HTTP POST request to the searchBuses endpoint

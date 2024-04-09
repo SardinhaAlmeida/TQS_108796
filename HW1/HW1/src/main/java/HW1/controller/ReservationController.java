@@ -64,11 +64,11 @@ public class ReservationController {
         reservation.setCreditCardCVV(creditCardCVV);
         reservation.setPerson(savedPerson);
         reservation.setBus(busService.getBusByBusNumber(busNumber));
-        log.info("Person saved: " + savedPerson.getName());
-        log.info("Bus saved: " + busService.getBusByBusNumber(busNumber).getBusNumber());
+        log.info("Person saved: {}" + savedPerson.getName());
+        log.info("Bus saved: {}" + busService.getBusByBusNumber(busNumber).getBusNumber());
 
         String token = reservationService.makeReservation(reservation);
-        log.info("Reservation successful: " + token);
+        log.info("Reservation successful: {}" + token);
 
         model.addAttribute("token", token);
         return "reservation";

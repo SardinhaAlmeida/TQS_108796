@@ -3,7 +3,7 @@ package HW1.controllerTests;
 import HW1.controller.CurrencyConversionController;
 import HW1.service.CurrencyConvService;
 
-import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -17,9 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
-import static org.hamcrest.Matchers.*;
 
 
 @WebMvcTest(CurrencyConversionController.class)
@@ -32,6 +30,7 @@ public class CurrencyConversionController_WithMockServiceTest {
     private CurrencyConvService currencyConversion_service;
 
     @Test
+    @DisplayName("Test getAllCurrencies")
     void testGetAllCurrencies() throws Exception {
 
         Map<String, Object> currencies = new HashMap<>();
@@ -59,6 +58,7 @@ public class CurrencyConversionController_WithMockServiceTest {
     }
 
     @Test
+    @DisplayName("Test getExchange")
     public void testGetExchange() throws Exception {
         String fromCurrency = "EUR";
         String toCurrency = "USD";

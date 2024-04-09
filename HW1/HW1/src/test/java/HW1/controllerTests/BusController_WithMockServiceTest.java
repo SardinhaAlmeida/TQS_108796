@@ -8,6 +8,7 @@ import static org.mockito.Mockito.when;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -31,6 +32,7 @@ public class BusController_WithMockServiceTest {
     private BusService bus_service;
 
     @Test
+    @DisplayName("Test searchBuses")
     void testSearchBuses() throws Exception{
 
         Bus bus3 = new Bus(3, "Porto", "Lisboa", "2024-04-12", "20:00", "23:00", 20, 5);
@@ -54,6 +56,7 @@ public class BusController_WithMockServiceTest {
     }
 
     @Test
+    @DisplayName("Test confirmView")
     void testConfirmView() throws Exception {
 
         mvc.perform(get("/")

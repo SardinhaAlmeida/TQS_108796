@@ -1,5 +1,6 @@
 package HW1.unitTests;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
@@ -145,10 +146,10 @@ public class ReservationService_UnitTest {
         verify(reservation_repository).findByToken(token);
     }
 
-    // @Test
-    // @DisplayName("Test getReservation for invalid token")
-    // public void testGetReservationForInvalidToken() {
-    //     assertEquals(null, reservation_service.getReservation("invalid_token").orElse(null));
-    // }
+    @Test
+    @DisplayName("Test getReservation for invalid token")
+    void testGetReservationForInvalidToken() {
+        assertEquals(null, reservation_service.getReservation("invalid_token"));
+    }
     
 }

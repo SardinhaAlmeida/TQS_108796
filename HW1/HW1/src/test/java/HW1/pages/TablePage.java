@@ -5,6 +5,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import org.openqa.selenium.By;
+
+import java.util.List;
+
 public class TablePage {
     
     private WebDriver driver;
@@ -12,17 +16,17 @@ public class TablePage {
     @FindBy(id = "currencySelector")
     private WebElement currencySelector;
 
-    @FindBy(id = "origin")
-    private WebElement originElement;
+    @FindBy(css = "tbody tr")
+    private List<WebElement> busRows;
 
-    @FindBy(id = "destination")
-    private WebElement destinationElement;
+    @FindBy(xpath = "//*[@id=\"busNumber\"]")
+    private WebElement busNumberElement;
 
-    @FindBy(id = "date")
-    private WebElement dateElement;
+    @FindBy(xpath = "//*[@id=\"price\"]")
+    private WebElement priceElement;
 
-    @FindBy(css = "form[method='post']")
-    private WebElement reserve;
+    @FindBy(css = "button")
+    private WebElement reserveButton;
 
     public TablePage(WebDriver driver) {
         this.driver = driver;
@@ -33,19 +37,14 @@ public class TablePage {
         currencySelector.sendKeys(currency);
     }
 
-    public String getOriginText() {
-        return originElement.getText();
-    }
-
-    public String getDestinationText() {
-        return destinationElement.getText();
-    }
-
-    public String getDateText() {
-        return dateElement.getText();
-    }
-
-    public void reserve() {
-        reserve.submit();
+    public void reserveBus(String busNumber, String price) {
+        for (WebElement row : busRows) {
+            if (busNumberElement.getText().equals(busNumber) &&
+                priceElement.getText().equals(price)) {
+                reserveButton.click();
+            break;
+            }
+        }
     }
 }
+

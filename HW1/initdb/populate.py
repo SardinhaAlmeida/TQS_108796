@@ -48,7 +48,7 @@ create_tables = [
     """,
     """
     CREATE TABLE IF NOT EXISTS person (
-        person_id BIGINT PRIMARY KEY,
+        person_id BIGINT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(100),
         surname VARCHAR(100),
         email VARCHAR(100),

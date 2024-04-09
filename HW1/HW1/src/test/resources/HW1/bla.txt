@@ -1,0 +1,33 @@
+
+        Given the user is on the index page
+        When the user writes "São Pedro do Sul" on the from input
+        And the user writes "Aveiro" on the to input
+        And the user selects "2024-02-12" on the date input
+        And the user clicks on the Search button
+        Then the user should be redirected to the table page
+        When the user the user selects the first available bus, with the bus_number 24 and price 7
+        And the user clicks on the Reserve button
+        Then the user is redirected to the personal page
+        When the user fills in the information needed:
+            | Name              | Sara                      |
+            | Surname           | Almeida                   |
+            | Email             | sarafalmeida@ua.pt        |
+            | PhoneNumber       | 123456789                 |
+            | Address           | Rua da Alegria            |
+            | City              | Viseu                     |
+            | PostalCode        | 3660-231                  |
+            | Country           | Portugal                  |
+            | CreditCardNumber  | 21312332534653            |
+            | CreditCardMM      | 12                        |
+            | CreditCardYY      | 26                        |
+            | CreditCardCVV     | 123                       |
+        And the user clicks the Submit button
+        Then the user is redirected to the reservation page
+        Where the token is presented
+        And the user clicks the Check Reservation button
+        Then the user is redirected to the check page
+        When the user pastes the token in the token input
+        And the user clicks the Check button
+        Then the user sees the reservation details
+        
+        
