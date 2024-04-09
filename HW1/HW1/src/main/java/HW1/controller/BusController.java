@@ -38,7 +38,7 @@ public class BusController {
                               @RequestParam("date") String date,
                               Model model) {
         List<Bus> buses = busService.getBuses(origin, destination, date);
-        log.info("Buses: {}" + buses);
+        log.info("Buses: []" + buses);
         log.info("Date: {}" + date);
         model.addAttribute("buses", buses);
         return "table";
