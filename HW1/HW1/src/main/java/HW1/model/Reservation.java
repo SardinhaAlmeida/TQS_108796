@@ -46,26 +46,16 @@ public class Reservation {
     @JoinColumn(name = "bus_number")
     private Bus bus;
 
-
-    // @Column(name = "origin")
-    // private String origin;
-
-    // @Column(name = "destination")
-    // private String destination;
-
-    // @Column(name = "departure_time")
-    // private String departure_time;
-
-    // @Column(name = "arrival_time")
-    // private String arrival_time;
-
-    // @Column(name = "date")
-    // private Date date;
-
-    // @Column(name = "price")
-    // private int price;
-
     @Column(name = "token")
     private String token;
+
+    public Reservation(Long creditCardNumber, Long creditCardMM, Long creditCardYY, Long creditCardCVV, Person person, Bus bus) {
+        this.creditCardNumber = creditCardNumber;
+        this.creditCardMM = creditCardMM;
+        this.creditCardYY = creditCardYY;
+        this.creditCardCVV = creditCardCVV;
+        this.person = person;
+        this.bus = bus;
+    }
     
 }

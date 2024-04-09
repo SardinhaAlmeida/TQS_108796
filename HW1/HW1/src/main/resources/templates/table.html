@@ -2,8 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <title>Bus Reservation System</title>
-  <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <title>Bus Reservation System</title>
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -17,7 +18,11 @@
                 <th>Date</th>
                 <th>Departure Time</th>
                 <th>Arrival Time</th>
-                <th>Price</th>
+                <th class="currency_dropdown">Price
+                    <select id="currencySelector" class="currency_dropdown-select">
+                        <option value="" disabled selected>Select currency</option>
+                    </select>
+                </th>
                 <th>Capacity</th>
                 <th>Reserve your ticket!</th>
             </tr>
@@ -25,22 +30,63 @@
         <tbody>
             <tr th:each="bus : ${buses}">
                 <td th:text="${bus.busNumber}"></td>
-                <td th:text="${bus.origin}"></td>
-                <td th:text="${bus.destination}"></td>
-                <td th:text="${bus.date}"></td>
+                <td th:text="${bus.origin}" id="origin"></td>
+                <td th:text="${bus.destination}" id="destination"></td>
+                <td th:text="${bus.date}" id="date"></td>
                 <td th:text="${bus.departureTime}"></td>
                 <td th:text="${bus.arrivalTime}"></td>
-                <td th:text="${bus.price}"></td>
+                <td class="currency" th:attr="data-original-price=${bus.price}"></td>
                 <td th:text="${bus.capacity}"></td>
                 <td>
                     <form th:action="@{/api/details}" method="post">
                         <input type="hidden" name="busNumber" th:value="${bus.busNumber}" />
                         <button type="submit">Reserve</button>
-                    </form>                    
+                    </form>
                 </td>
             </tr>
         </tbody>
     </table>
+
+    <script>
+        $(document).ready(function () {
+            var currencyData; 
+    
+            $.get("/api/currencies", function (data) {
+                currencyData = data.data; // Store currency data
+                var currencySelector = $("#currencySelector");
+                $.each(currencyData, function (code, currency) {
+                    currencySelector.append($("<option></option>")
+                        .attr("value", code)
+                        .text(code + " - " + currency.name));
+                });
+    
+                // Call updatePrice after currencyData is available
+                updatePrice("EUR");
+            });
+    
+            function updatePrice(selectedCurrency) {
+                var baseCurrency = "EUR";
+    
+                $.get("/api/exchange?from=" + baseCurrency + "&to=" + selectedCurrency, function (data) {
+                    var exchangeRate = data.data[selectedCurrency];
+    
+                    $("td.currency").each(function () {
+                        var originalPrice = parseFloat($(this).attr("data-original-price"));
+                        var convertedPrice = originalPrice * exchangeRate;
+                        var currencySymbol = currencyData[selectedCurrency].symbol_native;
+                        $(this).text(convertedPrice.toFixed(2) + " " + currencySymbol);
+                    });
+                });
+            }
+    
+            $("#currencySelector").change(function () {
+                var selectedCurrency = $(this).val();
+                updatePrice(selectedCurrency);
+            });
+        });
+    </script>
+    
 </body>
+
 
 </html>

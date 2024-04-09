@@ -10,30 +10,32 @@ import HW1.service.PersonService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Optional;
 
 import lombok.AllArgsConstructor;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Controller
 @AllArgsConstructor
 @RequestMapping("/api")
 public class ReservationController {
 
+    private static final Logger log = LoggerFactory.getLogger(ReservationController.class);
+
     @Autowired
-    private ReservationService reservationService;
     private BusService busService;
     private PersonService personService;
+    private ReservationService reservationService;
 
     @PostMapping("/details")
     public String fillData(@RequestParam("busNumber") int busNumber, Model model) {
@@ -41,7 +43,7 @@ public class ReservationController {
 
         model.addAttribute("bus", bus);
 
-        return "personal"; // Assuming "personal.html" is the name of your template file
+        return "personal";
     }
 
     @PostMapping("/reservation")
@@ -62,51 +64,33 @@ public class ReservationController {
         reservation.setCreditCardCVV(creditCardCVV);
         reservation.setPerson(savedPerson);
         reservation.setBus(busService.getBusByBusNumber(busNumber));
-        System.out.println(reservation.getPerson().getName());
-        System.out.println(reservation.getBus().getBusNumber());
-        System.out.println(reservation);
-        // Save the reservation
-        String token = reservationService.makeReservation(reservation);
+        log.info("Person saved: " + savedPerson.getName());
+        log.info("Bus saved: " + busService.getBusByBusNumber(busNumber).getBusNumber());
 
-        // Optionally, you can also return the saved reservation details to the view
-        // model.addAttribute("reservationDetails", reservation);
+        String token = reservationService.makeReservation(reservation);
+        log.info("Reservation successful: " + token);
+
         model.addAttribute("token", token);
-        // Return the view where you want to display the reservation details
         return "reservation";
     }
 
     @PostMapping("/reservation/check")
     public String getReservations(Model model) {
-        // Optional<Reservation> reservation = reservationService.getReservation(token);
-        // model.addAttribute("reservation", reservation.get());
         return "check";
     }
 
-    // @GetMapping("/reservation/check")
-    // public String getReservations(@RequestParam("token") String token, Model model) {
-    //     Optional<Reservation> reservation = reservationService.getReservation(token);
-    //     if (reservation.isPresent()) {
-    //         model.addAttribute("reservationDetails", reservation.get());
-    //     } else {
-    //         model.addAttribute("reservationDetails", null);
-    //     }
-    //     model.addAttribute("token", token);
-    //     return "check";
-    // }
-
     @GetMapping("/reservation/check")
-    @ResponseBody // Ensure that the return value is serialized to JSON
-    public ResponseEntity<?> getReservations(@RequestParam("token") String token, Model model) {
+    @ResponseBody
+    public ResponseEntity<Reservation> getReservations(@RequestParam("token") String token, Model model) {
         Optional<Reservation> reservation = reservationService.getReservation(token);
         if (reservation.isPresent()) {
             model.addAttribute("reservationDetails", reservation.get());
             model.addAttribute("token", token);
-            return ResponseEntity.ok(reservation.get()); // Return the reservation object
+            return ResponseEntity.ok(reservation.get());
         } else {
-            return ResponseEntity.notFound().build(); // Return 404 Not Found if reservation is not found
+            return ResponseEntity.notFound().build();
         }
 
     }
-
 
 }

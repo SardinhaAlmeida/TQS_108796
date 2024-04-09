@@ -47,5 +47,16 @@ public class Person {
 
     @Column(name = "country")
     private String country;
+
+    public Person(String name, String surname, String email, String phoneNumber, String address, String city, String postalCode, String country) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.city = city;
+        this.postalCode = postalCode;
+        this.country = country;
+    }
     
 }

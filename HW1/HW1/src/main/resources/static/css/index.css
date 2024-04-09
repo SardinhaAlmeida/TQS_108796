@@ -1,3 +1,10 @@
+/* body {
+  background-image: url('/bus.jpg');
+  background-size: cover; 
+  background-repeat: no-repeat;
+} */
+
+
 h1 {
     text-align: center;
   }
@@ -60,8 +67,18 @@ p {
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
+
   }
-  
+
+  .check {
+    position: absolute;
+    top: 20px;
+    right: 400px;
+    padding: 20px;
+    border: 1px solid #ccc;
+  }
+
+
   /* Form styles */
   form {
     max-width: min-content;
@@ -108,12 +125,14 @@ p {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 30px;
+    height: min-content;
   }
   
   th, td {
     padding: 10px;
     text-align: left;
     border: 1px solid #ccc;
+    height: min-content;
   }
   
   th {
@@ -137,9 +156,17 @@ p {
   body {
     background-color: #9933FF;
   }
-  
-  #tokenInputField {
-    height: 30px;
-    width: 300px;
-    margin-bottom: 20px;
+
+  .currency_dropdown {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
+  .currency_dropdown select {
+    margin-left: auto;
+    font-size: medium;
+    border-color: #000000 ;
+    border-radius: 8px;
+    background-color: #ffffff;
+  }
+  

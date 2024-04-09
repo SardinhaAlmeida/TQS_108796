@@ -18,6 +18,12 @@
     <input type="date" id="date" name="date" th:value="${date}">
     <button type="submit">Search Buses</button>
   </form>
+
+  <div class="check">
+    <form th:action="@{/api/reservation/check}" method="post">
+      <button type="submit">Check reservations</button>
+    </form>
+  </div>
   <!-- <script src="/js/index.js"></script> -->
 </body>
 
